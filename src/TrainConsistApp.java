@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class TrainConsistApp {
 
@@ -9,36 +8,26 @@ public class TrainConsistApp {
     System.out.println("=== Train Consist Management App ===");
     System.out.println("======================================\n");
 
-    // UC2 Header
-    System.out.println("UC2 - Add Passenger Bogies to Train");
+    // UC3 Header
+    System.out.println("UC3 - Track Unique Bogie IDs");
     System.out.println("======================================\n");
 
-    // Create passenger bogie list
-    List<String> passengerBogies = new ArrayList<>();
+    // Create HashSet for unique bogie IDs
+    Set<String> bogieIds = new HashSet<>();
 
-    // Add bogies
-    passengerBogies.add("Sleeper");
-    passengerBogies.add("AC Chair");
-    passengerBogies.add("First Class");
+    // Adding bogies (with duplicates intentionally)
+    bogieIds.add("BG101");
+    bogieIds.add("BG102");
+    bogieIds.add("BG103");
+    bogieIds.add("BG101"); // duplicate
+    bogieIds.add("BG102"); // duplicate
 
-    System.out.println("After Adding Bogies:");
-    System.out.println("Passenger Bogies : " + passengerBogies);
+    // Display result
+    System.out.println("Bogie IDs after insertion:");
+    System.out.println(bogieIds);
 
-    // Remove a bogie
-    passengerBogies.remove("AC Chair");
+    System.out.println("\nNote: Duplicate IDs are automatically removed.");
 
-    System.out.println("\nAfter Removing 'AC Chair':");
-    System.out.println("Passenger Bogies : " + passengerBogies);
-
-    // Check existence
-    System.out.println("\nChecking if 'Sleeper' exists:");
-    boolean exists = passengerBogies.contains("Sleeper");
-    System.out.println("Contains Sleeper? : " + exists);
-
-    // Final state
-    System.out.println("\nFinal Train Passenger Consist:");
-    System.out.println(passengerBogies);
-
-    System.out.println("\nUC2 operations completed successfully...");
+    System.out.println("\nUC3 operations completed successfully...");
   }
 }
