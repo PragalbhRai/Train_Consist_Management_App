@@ -1,77 +1,48 @@
-import java.util.*;
-
-// ================================
-// CUSTOM RUNTIME EXCEPTION
-// ================================
-class CargoSafetyException extends RuntimeException {
-  public CargoSafetyException(String message) {
-    super(message);
-  }
-}
-
 public class TrainConsistApp {
-
-  // ================================
-  // GOODS BOGIE
-  // ================================
-  static class GoodsBogie {
-    String type;
-    String cargo;
-
-    GoodsBogie(String type) {
-      this.type = type;
-    }
-
-    // ================================
-    // SAFE CARGO ASSIGNMENT METHOD
-    // ================================
-    void assignCargo(String cargo) {
-      try {
-        // BUSINESS RULE
-        if (type.equalsIgnoreCase("Rectangular") &&
-                cargo.equalsIgnoreCase("Petroleum")) {
-          throw new CargoSafetyException(
-                  "Unsafe Assignment: Rectangular bogie cannot carry Petroleum"
-          );
-        }
-
-        // SAFE ASSIGNMENT
-        this.cargo = cargo;
-        System.out.println("Cargo Assigned Successfully: " + type + " -> " + cargo);
-
-      } catch (CargoSafetyException e) {
-        System.out.println("Error: " + e.getMessage());
-
-      } finally {
-        System.out.println("Assignment Attempt Completed for: " + type);
-      }
-    }
-  }
 
   public static void main(String[] args) {
 
     System.out.println("======================================");
-    System.out.println("UC15 - Safe Cargo Assignment");
+    System.out.println("UC16 - Sort Passenger Bogies (Bubble Sort)");
     System.out.println("======================================\n");
 
-    // TEST CASES
+    // INPUT ARRAY
+    int[] capacities = {72, 56, 24, 70, 60};
 
-    GoodsBogie g1 = new GoodsBogie("Cylindrical");
-    GoodsBogie g2 = new GoodsBogie("Rectangular");
+    System.out.print("Before Sorting: ");
+    printArray(capacities);
 
-    // ✅ SAFE CASE
-    g1.assignCargo("Petroleum");
+    // ================================
+    // BUBBLE SORT LOGIC
+    // ================================
+    int n = capacities.length;
 
+    for (int i = 0; i < n - 1; i++) {
+
+      for (int j = 0; j < n - i - 1; j++) {
+
+        // Compare adjacent elements
+        if (capacities[j] > capacities[j + 1]) {
+
+          // Swap
+          int temp = capacities[j];
+          capacities[j] = capacities[j + 1];
+          capacities[j + 1] = temp;
+        }
+      }
+    }
+
+    System.out.print("\nAfter Sorting: ");
+    printArray(capacities);
+
+    System.out.println("\n\nUC16 bubble sort completed...");
+  }
+
+  // Helper Method
+  public static void printArray(int[] arr) {
+    for (int num : arr) {
+      System.out.print(num + " ");
+    }
     System.out.println();
-
-    // ❌ UNSAFE CASE
-    g2.assignCargo("Petroleum");
-
-    System.out.println();
-
-    // ✅ ANOTHER SAFE CASE
-    g2.assignCargo("Coal");
-
-    System.out.println("\nUC15 execution completed...");
   }
 }
